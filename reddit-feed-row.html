@@ -1,0 +1,55 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`reddit-feed-row`
+A demo Polymer element for showing a Reddit story.
+
+@demo demo/index.html
+-->
+<dom-module id="reddit-feed-row">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      div {
+        display: flex;
+        padding: 8px;
+      }
+
+      h2 {
+        padding: 8px;
+      }
+
+      img {
+        width: 140px;
+      }
+
+    </style>
+
+    <div>
+      <img src="[[_thumbnailSrc(data.data.thumbnail)]]" >
+      <h2>[[data.data.title]]</h2>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'reddit-feed-row',
+
+      properties: {
+        data: {
+          type: Object
+        }
+      },
+
+      _thumbnailSrc: function(thumbnail) {
+        if (thumbnail == 'self' || thumbnail == 'default') {
+          return '';
+        }
+        return thumbnail;
+      }
+    })
+  </script>
+</dom-module>

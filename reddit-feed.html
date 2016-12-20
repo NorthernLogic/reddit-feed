@@ -1,0 +1,48 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+
+<link rel="import" href="reddit-feed-row.html">
+
+<!--
+`reddit-feed`
+A demo Polymer element for showing a Reddit feed.
+
+@demo demo/index.html
+-->
+
+<dom-module id="reddit-feed">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <iron-ajax auto
+      url="https://www.reddit.com/r/[[query]]/top.json"
+      handle-as="json" last-response="{{response}}">
+    </iron-ajax>
+
+    <h1>Showing results for <span>[[query]]</span></h1>
+
+    <template is="dom-repeat" items="[[response.data.children]]">
+      <reddit-feed-row data="[[item]]"></reddit-feed-row>
+    </template>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'reddit-feed',
+
+      properties: {
+        query: {
+          type: String
+        }
+      }
+
+    });
+  </script>
+</dom-module>
